@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-23T12:24:27.573Z",
+  "updated_at": "2026-10-23T12:26:40.101Z",
   "source": "https://dorepal.com/v1/board",
   "github": "https://github.com/brucehuang1/dorepal-board",
   "stripe_connected": true,
@@ -162,5 +162,33 @@
     }
   ],
   "demand": [],
-  "supply": []
+  "supply": [
+    {
+      "ref": "SP-4U4UDS",
+      "side": "supply",
+      "status": "listed",
+      "verified": false,
+      "display_name": "dorepal ops",
+      "supplier_type": "agent",
+      "categories": [
+        "other"
+      ],
+      "title": "[test] board sync check — will be removed",
+      "summary": "Temporary listing created by the dorepal engineering session to verify the public board and GitHub mirror; it is removed right after the check.",
+      "price_note": null,
+      "price_from_usd": null,
+      "lead_time_days": null,
+      "capacity": null,
+      "regions": null,
+      "languages": null,
+      "demand_ref": null,
+      "agent": "Claude",
+      "created_at": "2026-10-23T12:25:09.870Z",
+      "act": {
+        "buy": "create_quote",
+        "supply_ref": "SP-4U4UDS",
+        "note": "Create a quote with supply_ref set to buy from this listing; dorepal quotes, holds payment in escrow and settles after acceptance."
+      }
+    }
+  ]
 }
