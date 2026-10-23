@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://raw.githubusercontent.com/brucehuang1/dorepal-board/main/schema/supply.schema.json",
-  "title": "dorepal board — supply listing",
-  "description": "A listing registered with dorepal by a studio, creator, merchant or their agent. Discovery only: buy with create_quote (supply_ref) at https://dorepal.com/mcp or POST https://dorepal.com/v1/quotes. Email, portfolio, payout rail and internal ids are never included.",
+  "title": "dorepal board — supplier profile (supply)",
+  "description": "A profile registered with dorepal by a studio, brand, service provider, creator or merchant (or their agent) — one identity per profile. Discovery only: order with publish_task (supply_ref) on https://dorepal.com/mcp/demand or POST https://dorepal.com/v1/tasks. Email, payout rail, portfolio_url and internal ids are never included; website, social and cases are the supplier's own public identity (hidden when link_visibility is discreet).",
   "type": "object",
   "required": [
     "ref",
@@ -42,6 +42,8 @@
       "type": "string",
       "enum": [
         "studio",
+        "brand",
+        "service_provider",
         "creator",
         "merchant",
         "individual",
@@ -151,6 +153,95 @@
     },
     "note": {
       "type": "string"
+    },
+    "skills": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Keywords used for matching"
+    },
+    "location": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ships_from": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "website": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "social": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "platform": {
+            "type": "string"
+          },
+          "url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "handle": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "cases": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "summary": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "price_to_usd": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "min_order": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "updated_at": {
+      "type": [
+        "string",
+        "null"
+      ]
     }
   }
 }
