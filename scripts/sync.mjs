@@ -94,7 +94,8 @@ function renderReadme(readme, board) {
 async function main() {
   let board;
   try {
-    const r = await fetch(SOURCE, { headers: { accept: 'application/json', 'user-agent': 'dorepal-board-sync' } });
+    // Cache-busting query: the board is edge-cached ~5 min for agents; the mirror wants the live read.
+    const r = await fetch(`${SOURCE}${SOURCE.includes('?') ? '&' : '?'}sync=${Date.now()}`, { headers: { accept: 'application/json', 'user-agent': 'dorepal-board-sync' } });
     if (!r.ok) { console.log(`skip: ${SOURCE} → HTTP ${r.status}`); return; }
     board = await r.json();
   } catch (e) {
