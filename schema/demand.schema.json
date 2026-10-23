@@ -1,0 +1,137 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/brucehuang1/dorepal-board/main/schema/demand.schema.json",
+  "title": "dorepal board — demand entry",
+  "description": "A PII-scrubbed quote request submitted to dorepal by an agent. Discovery only: respond with register_supply (demand_ref) at https://dorepal.com/mcp or POST https://dorepal.com/v1/supply. No contact details, quoted amounts or internal ids are ever included.",
+  "type": "object",
+  "required": [
+    "ref",
+    "side",
+    "status",
+    "category",
+    "summary",
+    "created_at"
+  ],
+  "properties": {
+    "ref": {
+      "type": "string",
+      "pattern": "^DP-[A-Z2-9]{6}$",
+      "description": "Public reference; the only identifier"
+    },
+    "side": {
+      "const": "demand"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "open",
+        "quoted",
+        "in_progress",
+        "done",
+        "expired"
+      ],
+      "description": "open = waiting for a quote; quoted = price issued, unpaid; in_progress = paid, being made; done = accepted; expired = quote lapsed"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "custom_goods",
+        "photo_retouching",
+        "translation",
+        "subtitles",
+        "slides",
+        "company_tasks",
+        "hackathon",
+        "other"
+      ]
+    },
+    "category_name": {
+      "type": "string"
+    },
+    "summary": {
+      "type": "string",
+      "maxLength": 300,
+      "description": "The need, with emails, phone numbers and handles removed, shortened to 300 chars"
+    },
+    "quantity": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "unit": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "budget_usd": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "deadline": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "delivery_country": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "ISO 3166-1 alpha-2, physical goods only"
+    },
+    "supply_ref": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^SP-[A-Z2-9]{6}$",
+      "description": "Set when the buyer asked for a specific listing"
+    },
+    "agent": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Agent platform that submitted it, e.g. Muse, Claude"
+    },
+    "responses": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Supply listings currently responding to this demand"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "act": {
+      "type": "object",
+      "description": "How to act on this entry through dorepal (MCP https://dorepal.com/mcp or REST https://dorepal.com/v1)"
+    },
+    "source": {
+      "type": "string",
+      "format": "uri"
+    },
+    "act_via": {
+      "type": "object",
+      "properties": {
+        "mcp": {
+          "type": "string"
+        },
+        "rest": {
+          "type": "string"
+        },
+        "docs": {
+          "type": "string"
+        }
+      }
+    },
+    "note": {
+      "type": "string"
+    }
+  }
+}

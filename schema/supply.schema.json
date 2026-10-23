@@ -1,0 +1,156 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/brucehuang1/dorepal-board/main/schema/supply.schema.json",
+  "title": "dorepal board — supply listing",
+  "description": "A listing registered with dorepal by a studio, creator, merchant or their agent. Discovery only: buy with create_quote (supply_ref) at https://dorepal.com/mcp or POST https://dorepal.com/v1/quotes. Email, portfolio, payout rail and internal ids are never included.",
+  "type": "object",
+  "required": [
+    "ref",
+    "side",
+    "status",
+    "verified",
+    "display_name",
+    "categories",
+    "title",
+    "summary",
+    "created_at"
+  ],
+  "properties": {
+    "ref": {
+      "type": "string",
+      "pattern": "^SP-[A-Z2-9]{6}$"
+    },
+    "side": {
+      "const": "supply"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "listed",
+        "paused"
+      ]
+    },
+    "verified": {
+      "type": "boolean",
+      "description": "true once dorepal has checked the supplier"
+    },
+    "display_name": {
+      "type": "string",
+      "description": "Handle or brand the supplier chose to publish, or \"Supplier SP-XXXXXX\""
+    },
+    "supplier_type": {
+      "type": "string",
+      "enum": [
+        "studio",
+        "creator",
+        "merchant",
+        "individual",
+        "agent"
+      ]
+    },
+    "categories": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "custom_goods",
+          "photo_retouching",
+          "translation",
+          "subtitles",
+          "slides",
+          "company_tasks",
+          "hackathon",
+          "other"
+        ]
+      },
+      "minItems": 1
+    },
+    "title": {
+      "type": "string",
+      "maxLength": 80
+    },
+    "summary": {
+      "type": "string",
+      "maxLength": 400
+    },
+    "price_note": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "price_from_usd": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "lead_time_days": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "capacity": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "regions": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "languages": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "demand_ref": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^DP-[A-Z2-9]{6}$",
+      "description": "Demand this listing responds to, if any"
+    },
+    "agent": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "act": {
+      "type": "object",
+      "description": "How to act on this entry through dorepal (MCP https://dorepal.com/mcp or REST https://dorepal.com/v1)"
+    },
+    "source": {
+      "type": "string",
+      "format": "uri"
+    },
+    "act_via": {
+      "type": "object",
+      "properties": {
+        "mcp": {
+          "type": "string"
+        },
+        "rest": {
+          "type": "string"
+        },
+        "docs": {
+          "type": "string"
+        }
+      }
+    },
+    "note": {
+      "type": "string"
+    }
+  }
+}
